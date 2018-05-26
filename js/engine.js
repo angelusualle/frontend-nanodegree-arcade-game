@@ -27,6 +27,8 @@ var Engine = (function(global) {
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+    var wins = 0;
+    var losses = 0;
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -79,9 +81,10 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
+    
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -95,6 +98,26 @@ var Engine = (function(global) {
         });
         player.update();
     }
+
+    /* This is called by the update function and is used to check whether any 
+     * game ending collisions have occurred.If so exists game.
+     */
+    function checkCollisions(){
+        let collision = false;
+        allEnemies.forEach((e) => {
+            if (Math.abs(e.y - player.y) <= 26 && Math.abs(e.x - player.x) <= 50){
+                collision = true;
+            }
+        });
+        if (collision){
+            window.alert('Lost! Press OK to start over.');
+            player.y = CANVAS_HEIGHT - 200;
+            player.x = CANVAS_WIDTH - 303;
+            losses++;
+            document.querySelector('#loss').textContent = losses;
+        }
+    }
+
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -182,4 +205,12 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    
+    /* Returns below function to alter number of wins
+     * 
+     */
+    return function() {
+        wins++;
+        return wins;
+    }
 })(this);
