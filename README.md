@@ -1,7 +1,7 @@
 # How to Run
 Open the index.html file in Chrome. Tested in version 66.0.3359.181 of Chrome.
 
-Can optionally play online by clicking below link:
+Can optionally play online by clicking link:
 [Angelusualle's Arcade Game](https://htmlpreview.github.io/?https://github.com/angelusualle/frontend-nanodegree-arcade-game/blob/master/index.html)
 
 # How to Play
